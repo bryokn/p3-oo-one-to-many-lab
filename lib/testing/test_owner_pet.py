@@ -45,8 +45,11 @@ def test_pet_has_all():
 def test_owner_has_pets():
     """Test Owner class has method pets(), returning all related pets"""
     owner = Owner("Ben")
-    pet1 = Pet("Fido", "dog", owner)
-    pet2 = Pet("Clifford", "dog", owner)
+    pet1 = Pet("Fido", "dog")
+    pet2 = Pet("Clifford", "dog")
+    
+    owner.add_pet(pet1)
+    owner.add_pet(pet2)
 
     assert owner.pets() == [pet1, pet2]
 
@@ -79,4 +82,11 @@ def test_get_sorted_pets():
     pet3 = Pet("Whiskers", "cat", owner)
     pet4 = Pet("Jerry", "reptile", owner)
     
-    assert owner.get_sorted_pets() == [pet2, pet1, pet4, pet3]
+    owner.add_pet(pet1)
+    owner.add_pet(pet2)
+    owner.add_pet(pet3)
+    owner.add_pet(pet4)
+    
+    sorted_pets_by_name = sorted([pet1, pet2, pet3, pet4], key =lambda pet: pet.name)
+    
+    assert owner.get_sorted_pets() == sorted_pets_by_name
